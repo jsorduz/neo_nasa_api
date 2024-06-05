@@ -1,7 +1,8 @@
+from datetime import datetime
+
 import pandas as pd
 import streamlit as st
 
-from logger import logger
 from services.nasa import get_neo, get_neo_by_id
 
 
@@ -106,6 +107,8 @@ def show_data():
         decimal=",",
         precision=2,
     )
+
+    st.metric(label=f"Number of Near Earth Object (NEO) on {datetime.now().strftime('%B %d of %Y')}", value=len(raw_data))
 
     st.dataframe(
         data,
